@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp//new_note
+    Server-->>Browser: HTTP 302 (Redirect to /notes)
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    Server-->>Browser: 200 OK (Notes page)
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    Server-->>Browser: 200 OK (CSS)
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    Server-->>Browser: 200 OK (JavaScript)
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    Server-->>Browser: 200 OK (Notes data)
+
+    note over Browser: Browser executes callback function and loads the notes
