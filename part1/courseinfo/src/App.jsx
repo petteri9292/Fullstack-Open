@@ -1,9 +1,9 @@
 const App = () => {
   const course = 'Half Stack application development'
   const courseParts = [
-    { part: 'Fundamentals of React', exercises: 10 },
-    { part: 'Using props to pass data', exercises: 7 },
-    { part: 'State of a component', exercises: 14 }
+    { partname: 'Fundamentals of React', exercises: 10 },
+    { partname: 'Using props to pass data', exercises: 7 },
+    { partname: 'State of a component', exercises: 14 }
   ];
   
 
@@ -30,10 +30,9 @@ const Content = (props) => {
   // console.log(props)
   return (
     <>
-
-      <p>{props.parts[0].part} {props.parts[0].exercises}</p>
-      <p>{props.parts[1].part} {props.parts[1].exercises}</p>
-      <p>{props.parts[2].part} {props.parts[2].exercises}</p>
+      <Part partname={props.parts[0].partname} exercises={props.parts[0].exercises}></Part>
+      <Part partname={props.parts[1].partname} exercises={props.parts[1].exercises}></Part>
+      <Part partname={props.parts[2].partname} exercises={props.parts[2].exercises}></Part>
     </>
 
   )
@@ -41,11 +40,17 @@ const Content = (props) => {
 }
 
 const Total = (props) => {
-  return(
+  return (
     <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + 
       props.parts[2].exercises}</p>
   )
 
+}
+
+const Part = (props) => {
+  return (
+    <p>{props.partname} {props.exercises}</p>
+  )
 }
 
 export default App
