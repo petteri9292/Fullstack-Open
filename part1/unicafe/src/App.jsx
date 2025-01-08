@@ -22,13 +22,18 @@ const App = () => {
   )
 }
 
-const Statistics = (props) => {
+const Statistics = ({N_of_good, N_of_neutral, N_of_negative}) => {
+  const total = N_of_good + N_of_neutral + N_of_negative
+  const positive_percent = N_of_good/total * 100
   return (
     <div>
       <h1>Statistics</h1>
-    <p>Good: {props.N_of_good}</p>
-    <p>Neutral: {props.N_of_neutral}</p>
-    <p>Negative: {props.N_of_negative}</p>
+    <p>Good: {N_of_good}</p>
+    <p>Neutral: {N_of_neutral}</p>
+    <p>Negative: {N_of_negative}</p>
+    <p>all: {total}</p>
+    <p>average: {(N_of_good-N_of_negative)/total}</p>
+    <p>positive: {positive_percent} %</p>
   </div>
   )
 }
