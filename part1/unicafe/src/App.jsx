@@ -27,6 +27,7 @@ const Statistics = ({N_of_good, N_of_neutral, N_of_negative}) => {
   const positive_percent = N_of_good/total * 100
   return (
     <div>
+      
       <h1>Statistics</h1>
     <p>Good: {N_of_good}</p>
     <p>Neutral: {N_of_neutral}</p>
