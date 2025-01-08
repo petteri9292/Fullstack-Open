@@ -14,7 +14,6 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes,setVotes] = useState(new Uint8Array(anecdotes.length))
-  
 
   const handleClickRandom = () => {
 
@@ -29,16 +28,38 @@ const App = () => {
     console.log()
   };
 
+
+
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>Has {votes[selected]} votes</p>
       <button onClick={handleClickVote}>Vote</button>
       <button onClick={handleClickRandom}>Next anecdote</button>
-      
+      <MostVoted votes={votes} anecdotes={anecdotes}></MostVoted>
+
     </div>
   )
 }
-
+const MostVoted = ({votes,anecdotes}) => {
+  function indexOfMax(arr) {
+    let maxIndex = 0;
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > arr[maxIndex]) {
+            maxIndex = i;
+        }
+    }
+    return maxIndex;
+  }
+  return (
+    <div>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[indexOfMax(votes)]}</p>
+      <p>Has {votes[indexOfMax(votes)]}</p>
+    </div>
+  )
+}
 
 export default App
