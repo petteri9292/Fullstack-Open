@@ -44,12 +44,38 @@ const Statistics = ({N_of_good, N_of_neutral, N_of_negative}) => {
     <div>
 
     <h1>Statistics</h1>
-    <StatisticLine text="Good" value={N_of_good}/>
-    <StatisticLine text="Neutral" value={N_of_neutral}/>
-    <StatisticLine text="Negative" value={N_of_negative}/>
-    <StatisticLine text="All" value={total}/>
-    <StatisticLine text="Average" value={(N_of_good-N_of_negative)/total}/>
-    <StatisticLine text="Positive " value={positive_percent + " %"}/>
+
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td>Good</td>
+          <td>{N_of_good}</td>
+        </tr>
+        <tr>
+          <td>Neutral</td>
+          <td>{N_of_neutral}</td>
+        </tr>
+        <tr>
+          <td>Negative</td>
+          <td>{N_of_negative}</td>
+        </tr>
+        <tr>
+          <td>All</td>
+          <td>{total}</td>
+        </tr>
+        <tr>
+          <td>Average</td>
+          <td>{(N_of_good-N_of_negative)/total}</td>
+        </tr>
+        <tr>
+          <td>Positive</td>
+          <td>{positive_percent + " %"}</td>
+        </tr>
+
+      </tbody>
+      <tfoot></tfoot>
+    </table>
   </div>
   )
 }
