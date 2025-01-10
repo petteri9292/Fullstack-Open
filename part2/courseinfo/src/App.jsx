@@ -25,8 +25,7 @@ const App = () => {
 }
 
 const Course = ( {course}) => {
-  let total = 0
-  course.parts.map(entry => total+=entry.exercises)
+  const total = course.parts.reduce((sum,entry) =>  sum+entry.exercises,0)
   console.log(total)
   return (
     <>
