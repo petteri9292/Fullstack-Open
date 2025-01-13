@@ -18,8 +18,14 @@ const App = () => {
       name : newName,
       id : persons.length + 1
     }
+    const temp_name_array = persons.map(person => person.name)
+    // console.log(temp_name_array)
+    if (temp_name_array.includes(new_name.name)){
+      alert(`${newName} is already added to phonebook`)
+    } else {
     setPersons(persons.concat(new_name))
     setNewName("")
+    }
   }
   return (
     <div>
