@@ -1,5 +1,10 @@
 import { useState } from 'react'
 
+
+import Render from "./components/Render.jsx"
+import AddName from "./components/AddName"
+import SearchFilter from './components/SearchFilter.jsx'
+
 const App = () => {
   // const [persons, setPersons] = useState([
   //   { name: 'Arto Hellas' , id:1, number: "040-1234567"}
@@ -49,33 +54,16 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
-        <div>
-          filter shown with <input onChange={handleSearchChange}></input>
-        </div>
-
-      </form>
+      <SearchFilter handleSearchChange={handleSearchChange}></SearchFilter>
       <h2>add a new</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input onChange={handleNameChange} value = {newName}/>
-        </div>
-        <div>number: <input onChange={handleNumberChange} value = {newNumber}></input></div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-
-      </form>
+      <AddName addName={addName} handleNameChange={handleNameChange} newName={newName}
+        handleNumberChange={handleNumberChange} newNumber={newNumber}/>
       <h2>Numbers</h2>
-      {persons
-        .filter((person) => person.name.toLowerCase().includes(searchTerm.toLowerCase()))
-        .map((person) => (
-          <div key={person.id}>
-            {person.name} {person.number}
-          </div>
-        ))}
+      <Render persons={persons} searchTerm={searchTerm}></Render>
     </div>
   )
 }
+
+
 
 export default App
