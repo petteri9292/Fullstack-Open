@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
 
-
+import numberService from "./services/numbers.jsx"
 import Render from "./components/Render.jsx"
 import AddName from "./components/AddName"
 import SearchFilter from './components/SearchFilter.jsx'
@@ -14,14 +14,11 @@ const App = () => {
 
 
   const hook = () => {
-    axios.get("http://localhost:3001/persons")
-    .then(response => {
-      console.log(response.data)
-      setPersons(response.data)
+    numberService.getAll().then(data => {
+      setPersons(data)
     })
-
-
   }
+
 
   useEffect(hook,[])
 
@@ -37,15 +34,13 @@ const App = () => {
     } else {
       setNewName("")
       setNewNumber("")
-      axios
-        .post('http://localhost:3001/persons', new_name)
-        .then(response => {
-          const updated_persons = persons.concat(response.data)
 
-          setPersons(updated_persons)
-        })
+      numberService.create(new_name).then(data => {
+        const updated_persons = persons.concat(data)
 
-      }
+        setPersons(updated_persons)
+      })
+    }
   }
 
   const handleNameChange = (event) => {
