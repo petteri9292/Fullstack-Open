@@ -22,6 +22,14 @@ const App = () => {
 
   useEffect(hook,[])
 
+  const handleDelete = (id, name) => {
+    if (window.confirm(`Delete ${name}?`)){
+      numberService.deleteObject(id).then(() => {
+        setPersons(persons.filter(person => person.id !== id))
+      })
+    }
+  }
+
   const addName = (event) => {
     event.preventDefault()
     const new_name = {
@@ -44,17 +52,14 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    // console.log(event.target.value)
     setNewName(event.target.value)
   }
   
   const handleNumberChange = (event) => {
-    // console.log(event.target.value)
     setNewNumber(event.target.value)
   }
 
   const handleSearchChange = (event) => {
-    // console.log(event.target.value)
     setSearchTerm(event.target.value)
   }
 
@@ -66,7 +71,7 @@ const App = () => {
       <AddName addName={addName} handleNameChange={handleNameChange} newName={newName}
         handleNumberChange={handleNumberChange} newNumber={newNumber}/>
       <h2>Numbers</h2>
-      <Render persons={persons} searchTerm={searchTerm}></Render>
+      <Render persons={persons} searchTerm={searchTerm} onDelete={handleDelete}></Render>
     </div>
   )
 }
