@@ -13,7 +13,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
-
+  const [isError, setErrorCondition] = useState(false)
 
   const hook = () => {
     numberService.getAll().then(data => {
@@ -30,6 +30,10 @@ const App = () => {
         setPersons(persons.filter(person => person.id !== id))
       })
     }
+    setErrorMessage(`Deleted ${name}`)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, (5000));
   }
 
   const addName = (event) => {
@@ -47,8 +51,15 @@ const App = () => {
           setErrorMessage(null)
         }, (5000));
         numberService.updateObject(object_id,new_name).then(response => {
-          console.log(response)
+          // console.log(response)
           setPersons(persons.map(person => person.id === object_id ? response : person))
+        }).catch(error => {
+          setErrorMessage(`Information of ${new_name.name} has already been removed from server`)
+          setErrorCondition(true)
+          setTimeout(() => {
+            setErrorMessage(null)
+            setErrorCondition(false)
+          }, 5000)
         })
       }
     } else {
@@ -63,7 +74,7 @@ const App = () => {
       setErrorMessage(`Added ${new_name.name}`)
       setTimeout(() => {
         setErrorMessage(null)
-      }, (5000));
+      }, (5000))
     }
   }
 
@@ -82,7 +93,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage}></Notification>
+      <Notification message={errorMessage} errorCondition={isError}></Notification>
       <SearchFilter handleSearchChange={handleSearchChange}></SearchFilter>
       <h2>add a new</h2>
       <AddName addName={addName} handleNameChange={handleNameChange} newName={newName}
