@@ -5,12 +5,14 @@ import numberService from "./services/numbers.jsx"
 import Render from "./components/Render.jsx"
 import AddName from "./components/AddName"
 import SearchFilter from './components/SearchFilter.jsx'
+import Notification from './components/Noticifation.jsx'
 
 const App = () => {
   const [persons,setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
+  const [errorMessage, setErrorMessage] = useState(null)
 
 
   const hook = () => {
@@ -40,6 +42,10 @@ const App = () => {
     if (temp_name_array.includes(new_name.name)){
       if (window.confirm(`${new_name.name} is already added to phonebook, replace the old number with a new one?`)){
         const object_id = persons.find((person) => person.name === new_name.name).id
+        setErrorMessage(`Changed number of ${new_name.name}`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, (5000));
         numberService.updateObject(object_id,new_name).then(response => {
           console.log(response)
           setPersons(persons.map(person => person.id === object_id ? response : person))
@@ -54,6 +60,10 @@ const App = () => {
 
         setPersons(updated_persons)
       })
+      setErrorMessage(`Added ${new_name.name}`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, (5000));
     }
   }
 
@@ -72,6 +82,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage}></Notification>
       <SearchFilter handleSearchChange={handleSearchChange}></SearchFilter>
       <h2>add a new</h2>
       <AddName addName={addName} handleNameChange={handleNameChange} newName={newName}
