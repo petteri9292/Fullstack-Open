@@ -19,20 +19,7 @@ function App() {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value)
-    // console.log(searchTerm)
   }
-
-
-  // useEffect(() => {
-  //   console.log("effect run:",searchTerm)
-  //   if (searchTerm) {
-  //     console.log("fetching countries")
-  //     axios.get("https://studies.cs.helsinki.fi/restcountries/api/all")
-  //   }
-
-
-
-  // })
 
 
   return (
